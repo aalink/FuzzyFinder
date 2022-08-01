@@ -12,9 +12,9 @@
 
 
 
-Repository link can be found here: 
+Repository link can be found here: https://github.com/aalink/FuzzyFinder
 
-Deployed Heroku link can be found here: 
+Deployed Heroku link can be found here: https://fuzzy-finder.herokuapp.com/
 
 ---
 
