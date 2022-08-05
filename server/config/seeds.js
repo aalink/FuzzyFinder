@@ -28,8 +28,8 @@ db.once('open', async () => {
         'A loving friend ready to help.',
       image: 'dog01.jpg',
       category: categories[0]._id,
-      price: 2.99,
-      quantity: 500
+      price: 5.99,
+      quantity: 1
     },
     {
       name: 'Pepper',
