@@ -23,13 +23,13 @@ db.once('open', async () => {
 
   const products = await Product.insertMany([
     {
-      name: 'Tin of Cookies',
+      name: 'Oreo',
       description:
-        'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-      image: 'cookie-tin.jpg',
+        'Trained as a guide dog, Orea is super helpful for blind people',
+      image: '1-dog-black-and-white',
       category: categories[0]._id,
-      price: 2.99,
-      quantity: 500
+      price: 5.99,
+      quantity: 1
     },
     {
       name: 'Canned Coffee',
