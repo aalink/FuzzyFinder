@@ -79,7 +79,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Marky",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "2-dog-mikey-mouse-ears.jpg",
@@ -87,7 +87,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Ricky",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "3-boxer-mix.jpg",
@@ -95,7 +95,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Danny",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "4-chihuahua.jpg",
@@ -104,7 +104,7 @@ db.once("open", async () => {
     },
 
     {
-      name: "Pepper",
+      name: "Terry",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "5-english-cocker-spaniel.jpg",
@@ -112,7 +112,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Mikey",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "6-dog-brown.jpg",
@@ -120,7 +120,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Davey",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "7-australian-shepherd.jpg",
@@ -128,7 +128,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Timmy",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "8-dog-playful.jpg",
@@ -136,7 +136,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Tommy",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "9-doberman.jpg",
@@ -144,7 +144,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Joey",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "10-poodle.jpg",
@@ -152,7 +152,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Robby",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "11-dog-blackbrownmix.jpg",
@@ -160,7 +160,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Johnny",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "12-german-longhaired-pointer.jpg",
@@ -168,7 +168,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Brian",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "13-continental-bulldog.jpg",
@@ -176,7 +176,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Willy",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "14-dalmatian.jpg",
@@ -184,7 +184,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Minnie",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "15-labrador-2.jpg",
@@ -192,7 +192,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Robin",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "16-labrador-1.jpg",
@@ -200,7 +200,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Jan",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "17-weimaraner.jpg",
@@ -208,7 +208,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Franky",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "18-jack-russell.jpg",
@@ -216,7 +216,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Brady",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "19-bulldog.jpg",
@@ -224,7 +224,7 @@ db.once("open", async () => {
       quantity: 30,
     },
     {
-      name: "Pepper",
+      name: "Demi",
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "20-australian-shepherd.jpg",
