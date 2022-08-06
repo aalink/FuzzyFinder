@@ -52,7 +52,7 @@ function ProductItem(item) {
         <div>Description of dog goes here</div>
         <span>Hourly Rate: ${price}</span>
       </div>
-      <button onClick={addToCart}>Add to cart</button>
+      <button onClick={addToCart}>Choose this fuzzy</button>
     </div>
   );
 }
