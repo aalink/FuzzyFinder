@@ -27,7 +27,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "dog01.jpg",
       category: categories[0]._id,
-      price: 5.99,
+      price:5,
       quantity: 1,
     },
     {
@@ -35,7 +35,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "dog02.jpg",
       category: categories[0]._id,
-      price: 1.99,
+      price:5,
       quantity: 500,
     },
     {
@@ -43,7 +43,7 @@ db.once("open", async () => {
       category: categories[1]._id,
       description: "A loving friend ready to help.",
       image: "dog03.jpg",
-      price: 7.99,
+      price:5,
       quantity: 20,
     },
     {
@@ -51,7 +51,7 @@ db.once("open", async () => {
       category: categories[1]._id,
       description: "A loving friend ready to help.",
       image: "dog04.jpg",
-      price: 3.99,
+      price:8,
       quantity: 50,
     },
     {
@@ -59,7 +59,7 @@ db.once("open", async () => {
       category: categories[1]._id,
       description: "A loving friend ready to help.",
       image: "dog05.jpg",
-      price: 14.99,
+      price: 5,
       quantity: 100,
     },
     {
@@ -67,7 +67,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "dog06.jpg",
-      price: 399.99,
+      price: 10,
       quantity: 30,
     },
     {
@@ -75,7 +75,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "1-dog-black-and-white.jpg",
-      price: 399.99,
+      price: 8,
       quantity: 30,
     },
     {
@@ -83,7 +83,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "2-dog-mikey-mouse-ears.jpg",
-      price: 399.99,
+      price: 10,
       quantity: 30,
     },
     {
@@ -91,7 +91,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "3-boxer-mix.jpg",
-      price: 399.99,
+      price: 8,
       quantity: 30,
     },
     {
@@ -99,7 +99,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "4-chihuahua.jpg",
-      price: 399.99,
+      price: 10,
       quantity: 30,
     },
 
@@ -108,7 +108,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "5-english-cocker-spaniel.jpg",
-      price: 399.99,
+      price:8,
       quantity: 30,
     },
     {
@@ -116,7 +116,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "6-dog-brown.jpg",
-      price: 399.99,
+      price: 10,
       quantity: 30,
     },
     {
@@ -124,7 +124,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "7-australian-shepherd.jpg",
-      price: 399.99,
+      price: 8,
       quantity: 30,
     },
     {
@@ -132,7 +132,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "8-dog-playful.jpg",
-      price: 399.99,
+      price: 10,
       quantity: 30,
     },
     {
@@ -140,7 +140,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "9-doberman.jpg",
-      price: 399.99,
+      price: 10,
       quantity: 30,
     },
     {
@@ -148,7 +148,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "10-poodle.jpg",
-      price: 399.99,
+      price: 10,
       quantity: 30,
     },
     {
@@ -156,7 +156,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "11-dog-blackbrownmix.jpg",
-      price: 399.99,
+      price: 10,
       quantity: 30,
     },
     {
@@ -164,7 +164,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "12-german-longhaired-pointer.jpg",
-      price: 399.99,
+      price: 15,
       quantity: 30,
     },
     {
@@ -172,7 +172,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "13-continental-bulldog.jpg",
-      price: 399.99,
+      price: 10,
       quantity: 30,
     },
     {
@@ -180,7 +180,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "14-dalmatian.jpg",
-      price: 399.99,
+      price: 15,
       quantity: 30,
     },
     {
@@ -188,7 +188,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "15-labrador-2.jpg",
-      price: 399.99,
+      price: 10,
       quantity: 30,
     },
     {
@@ -196,7 +196,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "16-labrador-1.jpg",
-      price: 399.99,
+      price: 10,
       quantity: 30,
     },
     {
@@ -204,7 +204,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "17-weimaraner.jpg",
-      price: 399.99,
+      price: 10,
       quantity: 30,
     },
     {
@@ -212,7 +212,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "18-jack-russell.jpg",
-      price: 399.99,
+      price: 8,
       quantity: 30,
     },
     {
@@ -220,7 +220,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "19-bulldog.jpg",
-      price: 399.99,
+      price: 10,
       quantity: 30,
     },
     {
@@ -228,7 +228,7 @@ db.once("open", async () => {
       category: categories[2]._id,
       description: "A loving friend ready to help.",
       image: "20-australian-shepherd.jpg",
-      price: 399.99,
+      price: 10,
       quantity: 30,
     },
   ]);
