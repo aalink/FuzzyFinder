@@ -2,6 +2,7 @@ import React from "react";
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
 
+
 function Nav() {
 
   function showNavigation() {
@@ -41,17 +42,20 @@ function Nav() {
 
   return (
     <header className="flex-row px-1">
-      <h1>
-        <Link to="/">
-          <span role="img" aria-label="shopping bag">🐶</span>
-          FuzzyFinder
-        </Link>
-      </h1>
+        <h1>
+          <Link to="/">
+            <span role="img" aria-label="shopping bag">🐶</span>
+            FuzzyFinder
+          </Link>
+          <span id="desc">Your personal therapy dog finder!</span>
+        </h1>
 
-      <nav>
-        {showNavigation()}
-      </nav>
+        <nav>
+          {showNavigation()}
+        </nav>
+
     </header>
+    
   );
 }
 
