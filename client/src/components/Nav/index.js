@@ -47,7 +47,7 @@ function Nav() {
             <span role="img" aria-label="shopping bag">🐶</span>
             FuzzyFinder
           </Link>
-          <span id="desc">Your personal therapy dog finder!</span>
+          {/* <span id="desc">Your personal therapy dog finder!</span> */}
         </h1>
 
         <nav>
