@@ -25,7 +25,18 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
-  orders: [Order.schema]
+  orders: [Order.schema],
+  userType: {
+    type: String,
+    required:true,
+  },
+  dog: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Dog' 
+  }],
+  earnings: {
+    type: Number,
+  }
 });
 
 // set up pre-save middleware to create password

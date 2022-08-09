@@ -7,12 +7,10 @@ const orderSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  products: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Product'
-    }
-  ]
+  dog: {
+    type: Schema.Types.ObjectId,
+    ref: 'Dog'
+  }
 });
 
 const Order = mongoose.model('Order', orderSchema);
