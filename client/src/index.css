@@ -252,6 +252,20 @@ input:focus {
   color: var(--error);
 }
 
+.search-container {
+  margin: 30px;
+}
+
+.search-form {
+  display: block;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 500px;
+  height: 33px;
+}
+
 @media screen and (min-width: 300px) {
   .card {
     width: 100%;
