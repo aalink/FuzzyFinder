@@ -28,7 +28,7 @@ db.once("open", async () => {
       image: "dog01.jpg",
       category: categories[0]._id,
       price:5,
-      quantity: 1,
+      zipcode: 30004,
     },
     {
       name: "Pepper",
@@ -36,7 +36,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "1-dog-black-and-white.jpg",
       price: 8,
-      quantity: 30,
+      zipcode: 30005,
     },
     // {
     //   name: "Scout",
@@ -44,7 +44,7 @@ db.once("open", async () => {
     //   description: "A loving friend ready to help.",
     //   image: "dog03.jpg",
     //   price:5,
-    //   quantity: 20,
+    //   zipcode: 30005,
     // },
     {
       name: "Marley",
@@ -52,7 +52,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "dog04.jpg",
       price:8,
-      quantity: 50,
+      zipcode: 30009,
     },
     {
       name: "Tank",
@@ -60,7 +60,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "dog05.jpg",
       price: 5,
-      quantity: 100,
+      zipcode: 30022,
     },
     // {
     //   name: "Cooper",
@@ -68,7 +68,7 @@ db.once("open", async () => {
     //   description: "A loving friend ready to help.",
     //   image: "dog06.jpg",
     //   price: 10,
-    //   quantity: 30,
+    //   zipcode: 30024,
     // },
     {
       name: "Marky",
@@ -76,7 +76,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "2-dog-mikey-mouse-ears.jpg",
       price: 10,
-      quantity: 30,
+      zipcode: 30008,
     },
     {
       name: "Penny",
@@ -84,7 +84,7 @@ db.once("open", async () => {
       image: "dog02.jpg",
       category: categories[0]._id,
       price:5,
-      quantity: 500,
+      zipcode: 30003,
     },
     {
       name: "Ricky",
@@ -92,7 +92,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "3-boxer-mix.jpg",
       price: 8,
-      quantity: 30,
+      zipcode: 30023,
     },
     {
       name: "Danny",
@@ -100,7 +100,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "4-chihuahua.jpg",
       price: 10,
-      quantity: 30,
+      zipcode: 30023,
     },
 
     {
@@ -109,7 +109,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "5-english-cocker-spaniel.jpg",
       price:8,
-      quantity: 30,
+      zipcode: 30023,
     },
     {
       name: "Mikey",
@@ -117,7 +117,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "6-dog-brown.jpg",
       price: 10,
-      quantity: 30,
+      zipcode: 30077,
     },
     {
       name: "Davey",
@@ -125,7 +125,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "7-australian-shepherd.jpg",
       price: 8,
-      quantity: 30,
+      zipcode: 30077,
     },
     {
       name: "Timmy",
@@ -133,7 +133,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "8-dog-playful.jpg",
       price: 10,
-      quantity: 30,
+      zipcode: 30077,
     },
     {
       name: "Tommy",
@@ -141,7 +141,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "9-doberman.jpg",
       price: 10,
-      quantity: 30,
+      zipcode: 30077,
     },
     {
       name: "Joey",
@@ -149,7 +149,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "10-poodle.jpg",
       price: 10,
-      quantity: 30,
+      zipcode: 30097,
     },
     {
       name: "Robby",
@@ -157,7 +157,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "11-dog-blackbrownmix.jpg",
       price: 10,
-      quantity: 30,
+      zipcode: 30097,
     },
     {
       name: "Johnny",
@@ -165,7 +165,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "12-german-longhaired-pointer.jpg",
       price: 15,
-      quantity: 30,
+      zipcode: 30097,
     },
     {
       name: "Brian",
@@ -173,7 +173,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "13-continental-bulldog.jpg",
       price: 10,
-      quantity: 30,
+      zipcode: 30097,
     },
     {
       name: "Willy",
@@ -181,7 +181,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "14-dalmatian.jpg",
       price: 15,
-      quantity: 30,
+      zipcode: 30026,
     },
     {
       name: "Minnie",
@@ -189,7 +189,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "15-labrador-2.jpg",
       price: 10,
-      quantity: 30,
+      zipcode: 30026,
     },
     {
       name: "Robin",
@@ -197,7 +197,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "16-labrador-1.jpg",
       price: 10,
-      quantity: 30,
+      zipcode: 30087,
     },
     {
       name: "Jan",
@@ -205,7 +205,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "17-weimaraner.jpg",
       price: 10,
-      quantity: 30,
+      zipcode: 30087,
     },
     {
       name: "Franky",
@@ -213,7 +213,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "18-jack-russell.jpg",
       price: 8,
-      quantity: 30,
+      zipcode: 30087,
     },
     {
       name: "Brady",
@@ -221,7 +221,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "19-bulldog.jpg",
       price: 10,
-      quantity: 30,
+      zipcode: 30087,
     },
     {
       name: "Demi",
@@ -229,7 +229,7 @@ db.once("open", async () => {
       description: "A loving friend ready to help.",
       image: "20-australian-shepherd.jpg",
       price: 10,
-      quantity: 30,
+      zipcode: 30087,
     },
   ]);
 
