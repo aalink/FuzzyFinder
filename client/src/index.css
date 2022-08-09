@@ -82,29 +82,30 @@ a:hover {
 }
 
 header {
-  background: var(--primary);
-  /* position: fixed;
-  top: 0;
-  right: 0; */
+  /* color: var(--primary); */
+  background: url("../src/assets/background1-friends4ever.jpg") no-repeat center;
+  background-size: cover;
+  overflow: hidden;
+  padding-top: 700px;
   width: auto;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
 header h1 {
   font-size: larger;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
 }
 
-header #desc {
+/* header #desc {
   color: var(--light);
   padding-left: 30px;
   font-style: italic;
   font-size: 1.5rem;
-}
+} */
 
 header a {
   color: var(--light);
@@ -257,7 +258,7 @@ input:focus {
   }
   header {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
   }
 }
 
