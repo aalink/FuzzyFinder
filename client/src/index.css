@@ -247,7 +247,9 @@ input:focus {
   width: 25%;
   text-align: center;
 }
-
+/* .card img {
+  max-height: 350px;
+} */
 .error-text {
   color: var(--error);
 }
