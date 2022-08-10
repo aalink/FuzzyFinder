@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
+const Order = require('./Order');
 
-const productSchema = new Schema({
+const dogSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -14,23 +15,30 @@ const productSchema = new Schema({
   image: {
     type: String
   },
-  price: {
+  rate: {
     type: Number,
     required: true,
-    min: 0.99
   },
-  quantity: {
+  zipCode: {
     type: Number,
-    min: 0,
-    default: 0
+    required: true,
   },
-  category: {
+  categories: [{
     type: Schema.Types.ObjectId,
     ref: 'Category',
     required: true
+  }],
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  client: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   }
 });
 
-const Product = mongoose.model('Product', productSchema);
+const Dog = mongoose.model('Dog', dogSchema);
 
-module.exports = Product;
+module.exports = Dog;
