@@ -1,5 +1,5 @@
 const db = require("./connection");
-const { User, Product, Category } = require("../models");
+const { User, Dog, Category } = require("../models");
 
 db.once("open", async () => {
   await Category.deleteMany();
@@ -19,9 +19,9 @@ db.once("open", async () => {
 
   console.log("categories seeded");
 
-  await Product.deleteMany();
+  await Dog.deleteMany();
 
-  const products = await Product.insertMany([
+  const dogs = await Dog.insertMany([
     {
       name: "Luna",
       description: "Hi, I'm Luna, a 2-year-old black labrador. I'm professionally trained as a guide dog, I have great memory, pay attention to the surroundings. I'm willing to learn your environment and help you concentrate. I'm also a sweet, playful girl, love playing gently with seniors or kids. If you're looking for a smart, gentle guide dog for a few days, please request for me! Just follow the directions below. After you turn in your application, my owner will contact you to set up an appointment to meet. ",
