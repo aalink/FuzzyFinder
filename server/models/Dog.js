@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 const Order = require('./Order');
+
 const dogSchema = new Schema({
   name: {
     type: String,
@@ -18,19 +19,26 @@ const dogSchema = new Schema({
     type: Number,
     required: true,
   },
-  quantity: {
+  zipCode: {
     type: Number,
-    min: 0,
-    default: 0
+    required: true,
   },
   categories: [{
     type: Schema.Types.ObjectId,
     ref: 'Category',
     required: true
   }],
-  user
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  client: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
-const Product = mongoose.model('Product', productSchema);
+const Dog = mongoose.model('Dog', dogSchema);
 
-module.exports = Product;
+module.exports = Dog;

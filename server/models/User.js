@@ -28,7 +28,7 @@ const userSchema = new Schema({
   orders: [Order.schema],
   userType: {
     type: String,
-    required:true,
+    required: true,
   },
   dog: [{
     type: Schema.Types.ObjectId,
