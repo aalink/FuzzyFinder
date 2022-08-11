@@ -54,13 +54,13 @@ const resolvers = {
     },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
-      const order = new Order({ dog: args.dog });
+      const order = new Order({ dogs: args.dogs });
       const line_items = [];
 
       const { dogs } = await order.populate('dogs');
 
       for (let i = 0; i < dogs.length; i++) {
-        const dog = await stripe.dogs.create({
+        const dog = await stripe.products.create({
           name: dogs[i].name,
           description: dogs[i].description,
           images: [`${url}/images/${dogs[i].image}`]
@@ -115,10 +115,9 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    updateDog: async (parent, { _id, quantity }) => {
-      const decrement = Math.abs(quantity) * -1;
+    updateDog: async (parent, { _id, dogToUpdate }) => {
 
-      return await Dog.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
+      return await Dog.findByIdAndUpdate(_id, { $set: { dogToUpdate } }, { new: true });
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
@@ -136,6 +135,14 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+    addDog: async (parent, dogToSave, context) => {
+      if (context.user) {
+        const dogToSave = dogToSave;
+        dogToSave.user = context.user._id;
+        const dog=await Dog.create({dogToSave});
+        return await User.findByIdAndUpdate(context.user._id, {$addToSet: { dogs: dog._id }}, { new: true });
+      }
     }
   }
 };

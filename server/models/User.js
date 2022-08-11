@@ -25,12 +25,12 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
-  orders: [Order.schema],
   userType: {
     type: String,
     required: true,
   },
-  dog: [{
+  orders: [Order.schema],
+  dogs: [{
     type: Schema.Types.ObjectId,
     ref: 'Dog' 
   }],

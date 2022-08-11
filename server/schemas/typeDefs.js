@@ -3,35 +3,37 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type Category {
     _id: ID
-    name: String
+    name: String!
   }
 
   type Dog {
     _id: ID
-    name: String
+    name: String!
     description: String
     image: String
-    rate: Float
-    zipCode: Int
-    categories: [Category]
-    user: User
+    rate: Float!
+    zipCode: Int!
+    categories: [Category]!
+    user: User!
     client: [User]
   }
 
   type Order {
     _id: ID
     purchaseDate: String
-    dogs: [Dog]
+    dogs: [Dog]!
+    quantity: Int!
   }
 
   type User {
     _id: ID
-    firstName: String
-    lastName: String
-    email: String
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+    userType: String!
     orders: [Order]
-    userType: String
-    dog: [Dog]
+    dogs: [Dog]
     earnings: Float
   }
 
@@ -44,6 +46,27 @@ const typeDefs = gql`
     user: User
   }
 
+  input UserInput {
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+    userType: String!
+    orders: [Order]
+    dogs: [Dog]
+    earnings: Float
+  }
+  input DogInput {
+    name: String!
+    description: String
+    image: String
+    rate: Float!
+    zipCode: Int!
+    categories: [Category]!
+    user: User!
+    client: [User]
+  }
+
   type Query {
     categories: [Category]
     dogs(category: ID, name: String): [Dog]
@@ -54,10 +77,11 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addOrder(dogs: [ID]!): Order
-    updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateDog(_id: ID!, quantity: Int!): Dog
+    addUser(userToAdd: UserInput): Auth
+    addOrder(dogs: [ID]!, quantity:[Int]!): Order
+    updateUser(userToUpdate: UserInput): User
+    addDog (dogToSave: DogInput)
+    updateDog(_id: ID!, dogToUpdate: DogInput): Dog
     login(email: String!, password: String!): Auth
   }
 `;
