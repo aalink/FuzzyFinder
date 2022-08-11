@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Footer from '../components/Footer';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER } from '../utils/queries';
 
@@ -14,6 +14,7 @@ function OrderHistory() {
 
   return (
     <>
+      <div>
       <div className="container my-1">
         <Link to="/">← Back to Fuzzies</Link>
 
@@ -44,6 +45,8 @@ function OrderHistory() {
             ))}
           </>
         ) : null}
+      </div>
+      <Footer />
       </div>
     </>
   );
