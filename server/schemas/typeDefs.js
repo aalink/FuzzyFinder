@@ -13,7 +13,7 @@ const typeDefs = gql`
     image: String
     rate: Float!
     zipCode: Int!
-    categories: [Category]!
+    category: [Category]!
     user: User!
     client: [User]
   }
@@ -46,25 +46,59 @@ const typeDefs = gql`
     user: User
   }
 
-  input UserInput {
+  input CategoryInput {
+    _id: ID
+    name: String!
+  }
+
+  input OrderInput {
+    _id: ID
+    purchaseDate: String
+    dogs: [DogInput]!
+    quantity: Int!
+  }
+
+  input UserAddInput {
     firstName: String!
     lastName: String!
     email: String!
     password: String!
     userType: String!
-    orders: [Order]
-    dogs: [Dog]
+    orders: [OrderInput]
+    dogs: [DogInput]
     earnings: Float
   }
-  input DogInput {
+  input UserInput {
+    _id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+    userType: String!
+    orders: [OrderInput]
+    dogs: [DogInput]
+    earnings: Float
+  }
+  input DogAddInput {
     name: String!
     description: String
     image: String
     rate: Float!
     zipCode: Int!
-    categories: [Category]!
-    user: User!
-    client: [User]
+    category: [CategoryInput]!
+    user: UserInput!
+    client: [UserInput]
+  }
+  input DogInput {
+    _id: ID!
+    name: String!
+    description: String
+    image: String
+    rate: Float!
+    zipCode: Int!
+    category: [CategoryInput]!
+    user: UserInput!
+    client: [UserInput]
   }
 
   type Query {
@@ -77,11 +111,11 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(userToAdd: UserInput): Auth
+    addUser(userToAdd: UserAddInput): Auth
     addOrder(dogs: [ID]!, quantity:[Int]!): Order
     updateUser(userToUpdate: UserInput): User
-    addDog (dogToSave: DogInput)
-    updateDog(_id: ID!, dogToUpdate: DogInput): Dog
+    addDog (dogToSave: DogAddInput): Dog
+    updateDog(dogToUpdate: DogInput): Dog
     login(email: String!, password: String!): Auth
   }
 `;
