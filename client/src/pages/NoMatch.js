@@ -1,5 +1,6 @@
 import React from "react";
 import Jumbotron from "../components/Jumbotron";
+import Footer from '../components/Footer'
 
 const NoMatch = () => {
   return (
@@ -12,6 +13,7 @@ const NoMatch = () => {
           </span>
         </h1>
       </Jumbotron>
+      <Footer />
     </div>
   );
 };

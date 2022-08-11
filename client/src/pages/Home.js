@@ -3,6 +3,7 @@ import DogList from "../components/DogList";
 import CategoryMenu from "../components/CategoryMenu";
 import Cart from "../components/Cart";
 import SearchArea from "../components/Search";
+import Footer from "../components/Footer"
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <CategoryMenu />
       <DogList />
       <Cart />
+      <Footer />
     </div>
   );
 };
