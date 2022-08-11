@@ -3,10 +3,10 @@
 
 import React, { createContext, useContext } from 'react';
 
-// TODO: Add a comment describing the React hook that `useProductReducer` makes use of
+// TODO: Add a comment describing the React hook that `useDogReducer` makes use of
 // Your comment here
 
-import { useProductReducer } from './reducers';
+import { useDogReducer } from './reducers';
 
 // TODO: Add a comment briefly describing what `createContext` does and what it returns
 // Your comment here
@@ -16,8 +16,8 @@ const StoreContext = createContext();
 const { Provider } = StoreContext;
 
 const StoreProvider = ({ value = [], ...props }) => {
-  const [state, dispatch] = useProductReducer({
-    products: [],
+  const [state, dispatch] = useDogReducer({
+    dogs: [],
     cart: [],
     cartOpen: false,
     categories: [],

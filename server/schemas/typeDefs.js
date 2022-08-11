@@ -3,31 +3,38 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type Category {
     _id: ID
-    name: String
+    name: String!
   }
 
-  type Product {
+  type Dog {
     _id: ID
-    name: String
+    name: String!
     description: String
     image: String
-    quantity: Int
-    price: Float
-    category: Category
+    rate: Float!
+    zipCode: Int!
+    categories: [Category]!
+    user: User!
+    client: [User]
   }
 
   type Order {
     _id: ID
     purchaseDate: String
-    products: [Product]
+    dogs: [Dog]!
+    quantity: Int!
   }
 
   type User {
     _id: ID
-    firstName: String
-    lastName: String
-    email: String
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+    userType: String!
     orders: [Order]
+    dogs: [Dog]
+    earnings: Float
   }
 
   type Checkout {
@@ -39,20 +46,42 @@ const typeDefs = gql`
     user: User
   }
 
+  input UserInput {
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+    userType: String!
+    orders: [Order]
+    dogs: [Dog]
+    earnings: Float
+  }
+  input DogInput {
+    name: String!
+    description: String
+    image: String
+    rate: Float!
+    zipCode: Int!
+    categories: [Category]!
+    user: User!
+    client: [User]
+  }
+
   type Query {
     categories: [Category]
-    products(category: ID, name: String): [Product]
-    product(_id: ID!): Product
+    dogs(category: ID, name: String): [Dog]
+    dog(_id: ID!): Dog
     user: User
     order(_id: ID!): Order
-    checkout(products: [ID]!): Checkout
+    checkout(dogs: [ID]!): Checkout
   }
 
   type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addOrder(products: [ID]!): Order
-    updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateProduct(_id: ID!, quantity: Int!): Product
+    addUser(userToAdd: UserInput): Auth
+    addOrder(dogs: [ID]!, quantity:[Int]!): Order
+    updateUser(userToUpdate: UserInput): User
+    addDog (dogToSave: DogInput)
+    updateDog(_id: ID!, dogToUpdate: DogInput): Dog
     login(email: String!, password: String!): Auth
   }
 `;

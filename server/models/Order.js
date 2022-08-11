@@ -7,10 +7,16 @@ const orderSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  dog: {
+  dogs: [{
     type: Schema.Types.ObjectId,
-    ref: 'Dog'
-  }
+    ref: 'Dog',
+    required: true,
+  }],
+  quantity: [{
+    type: Number,
+    required: true,
+  }]
+
 });
 
 const Order = mongoose.model('Order', orderSchema);
