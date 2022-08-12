@@ -26,8 +26,8 @@ const resolvers = {
           $regex: name
         };
       }
-
-      return await Dog.find(params).populate('category').populate('user');
+      const response = await Dog.find({...params}).populate('category').populate('user');
+      return response;
     },
     dog: async (parent, { _id }) => {
       return await Dog.findById(_id).populate('category').populate('user');
