@@ -1,6 +1,12 @@
 const { gql } = require('apollo-server-express');
+const {
+  GraphQLUpload,
+  graphqlUploadExpress, // A Koa implementation is also exported.
+} = require('graphql-upload');
 
 const typeDefs = gql`
+  scalar Upload
+
   type Category {
     _id: ID
     name: String!
@@ -16,6 +22,11 @@ const typeDefs = gql`
     category: [Category]!
     user: User!
     client: [User]
+  }
+
+  type DogOwner {
+    _id: ID
+    owner: User
   }
 
   type Order {
@@ -101,6 +112,13 @@ const typeDefs = gql`
     client: [UserInput]
   }
 
+  type S3Object {
+    ETag: String
+    Location: String!
+    Key: String!
+    Bucket: String!
+  }
+
   type Query {
     categories: [Category]
     dogs(category: ID, name: String): [Dog]
@@ -117,6 +135,7 @@ const typeDefs = gql`
     addDog (dogToSave: DogAddInput): Dog
     updateDog(dogToUpdate: DogInput): Dog
     login(email: String!, password: String!): Auth
+    uploadFile(file: Upload!): S3Object
   }
 `;
 
