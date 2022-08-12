@@ -12,7 +12,8 @@ function DogItem(item) {
     image,
     name,
     _id,
-    price,
+    rate,
+    description,
     // quantity
   } = item;
 
@@ -49,8 +50,8 @@ function DogItem(item) {
         <p>{name}</p>
       </Link>
       <div>
-        <div>Description of dog goes here</div>
-        <span>Hourly Rate: ${price}</span>
+        {/* <div>Description of dog goes here</div> */}
+        <span>Hourly Rate: ${rate}</span>
       </div>
       <button onClick={addToCart}>Choose this fuzzy</button>
     </div>

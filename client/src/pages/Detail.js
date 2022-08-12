@@ -93,7 +93,7 @@ function Detail() {
           <p>{currentDog.description}</p>
 
           <p>
-            <strong>Price:</strong>${currentDog.price}{' '}
+            <strong>Hourly Rate:</strong>${currentDog.rate}{' '}
             <button onClick={addToCart}>Choose this fuzzy</button>
             <button
               disabled={!cart.find((p) => p._id === currentDog._id)}
