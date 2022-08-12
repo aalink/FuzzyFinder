@@ -54,7 +54,7 @@ function DogList() {
               _id={dog._id}
               image={dog.image}
               name={dog.name}
-              price={dog.rate}
+              rate={dog.rate}
               quantity={dog.quantity}
               description={dog.description}
             />
