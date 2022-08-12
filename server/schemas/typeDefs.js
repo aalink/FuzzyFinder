@@ -19,7 +19,7 @@ const typeDefs = gql`
     image: String
     rate: Float!
     zipCode: Int!
-    category: [Category]!
+    category: Category!
     user: User!
     client: [User]
   }
