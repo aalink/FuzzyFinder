@@ -1,9 +1,15 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Dog, Category, Order } = require('../models');
 const { signToken } = require('../utils/auth');
+const handleFileUpload = require('../utils/fileUpload');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const {
+  GraphQLUpload,
+  graphqlUploadExpress, // A Koa implementation is also exported.
+} = require('graphql-upload');
 
 const resolvers = {
+  Upload: GraphQLUpload,
   Query: {
     categories: async () => {
       return await Category.find();
@@ -21,10 +27,10 @@ const resolvers = {
         };
       }
 
-      return await Dog.find(params).populate('category');
+      return await Dog.find(params).populate('category').populate('user');
     },
     dog: async (parent, { _id }) => {
-      return await Dog.findById(_id).populate('category');
+      return await Dog.findById(_id).populate('category').populate('user');
     },
     user: async (parent, args, context) => {
       if (context.user) {
@@ -92,6 +98,10 @@ const resolvers = {
   Mutation: {
     addUser: async (parent, args) => {
       const user = await User.create(args);
+      if (args.userType === 'owner') {
+        args.dog.user._id = user._id
+        await Dog.create (args);
+      }
       const token = signToken(user);
 
       return { token, user };
@@ -121,7 +131,6 @@ const resolvers = {
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-
       if (!user) {
         throw new AuthenticationError('Incorrect credentials');
       }
@@ -143,8 +152,12 @@ const resolvers = {
         const dog=await Dog.create({dogToSave});
         return await User.findByIdAndUpdate(context.user._id, {$addToSet: { dogs: dog._id }}, { new: true });
       }
+    },
+    uploadFile: async (parent, {file}, context) => {
+      const response = await handleFileUpload(file);
+      return response;
     }
-  }
+   }
 };
 
 module.exports = resolvers;
