@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const Order = require('./Order');
 
 const dogSchema = new Schema({
   name: {
@@ -23,11 +22,11 @@ const dogSchema = new Schema({
     type: Number,
     required: true,
   },
-  category: [{
+  category: {
     type: Schema.Types.ObjectId,
     ref: 'Category',
     required: true
-  }],
+  },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',

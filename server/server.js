@@ -2,6 +2,8 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
+// const graphqlUploadExpress = require('graphql-upload/graphqlUploadExpress.mjs');
+const {graphqlUploadExpress} = require('graphql-upload')
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -16,6 +18,7 @@ const server = new ApolloServer({
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(graphqlUploadExpress()); //upload graphql
 
 // Serve up static assets
 app.use('/images', express.static(path.join(__dirname, '../client/images')));
