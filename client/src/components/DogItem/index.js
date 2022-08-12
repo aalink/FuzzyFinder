@@ -50,8 +50,7 @@ function DogItem(item) {
         <p>{name}</p>
       </Link>
       <div>
-        <div>Description of dog goes here</div>
-        {/* <div>{description}</div> */}
+        {/* <div>Description of dog goes here</div> */}
         <span>Hourly Rate: ${price}</span>
       </div>
       <button onClick={addToCart}>Choose this fuzzy</button>
