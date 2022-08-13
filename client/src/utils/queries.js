@@ -74,3 +74,10 @@ export const QUERY_USER = gql`
     }
   }
 `;
+export const QUERY_CATEGORY = gql`
+query getCategory($categoryName: String!) {
+  category(categoryName: $categoryName) {
+    _id
+  }
+}
+`;

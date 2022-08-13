@@ -14,6 +14,9 @@ const resolvers = {
     categories: async () => {
       return await Category.find();
     },
+    category: async (parent, {categoryName}) => {
+      return await Category.findOne({ name: categoryName });
+    },
     dogs: async (parent, { category, name }) => {
       const params = {};
 
@@ -97,6 +100,8 @@ const resolvers = {
   },
   Mutation: {
     addUser: async (parent, {userToAdd, dogToAdd}) => {
+      console.log(userToAdd);
+      console.log(dogToAdd);
       let user = await User.create(userToAdd);
       if (user.userType === 'owner') {
         const addDog = {...dogToAdd ,user: user._id}

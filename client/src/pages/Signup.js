@@ -1,12 +1,10 @@
-import Pagination from 'react-bootstrap/Pagination';
 import { Button, Form, Container,Row, Col } from 'react-bootstrap';
 import React, { useState, useEffect } from 'react';
-import { validateEmail } from '../utils/helpers';
+import { validateEmail, idbPromise } from '../utils/helpers';
 import { useStoreContext } from "../utils/GlobalState";
-import { useQuery } from '@apollo/client';
-import { QUERY_CATEGORIES } from '../utils/queries'
+import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
+import { QUERY_CATEGORIES, QUERY_CATEGORY } from '../utils/queries'
 import { UPDATE_CATEGORIES } from "../utils/actions";
-import { idbPromise } from "../utils/helpers";
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { Link } from 'react-router-dom';
@@ -21,16 +19,18 @@ function Signup(props) {
     name:'',
     description: '',
     image: '',
-    rate: '',
-    zipCode: '',
-    category: 'Guide Dogs'
-});
+    rate: 0,
+    zipCode: 0,
+    category: 'Guide Dogs',
+    categoryId: ''
+  });
   const [errorMessage, setErrorMessage] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
   const [state, dispatch] = useStoreContext();
   const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
+  const [getCategory, {datos}] = useLazyQuery(QUERY_CATEGORY);
+  const [addUser] = useMutation(ADD_USER);
   const { categories } = state;
-
+  
   useEffect(() => {
     if (categoryData) {
       dispatch({
@@ -49,24 +49,24 @@ function Signup(props) {
       });
     }
   }, [categoryData, loading, dispatch]);
-
-    const handleInputChange = (event) => {
+  
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormState({
       ...formState,
       [name]: value,
     });
   };
-  const handlePage = (e) => {
-    if (e.currentTarget.name === 'next' && currentPage === 1) {
-      setCurrentPage(2);
-    } else if (e.currentTarget.name === 'previous' && currentPage === 2) {
-      setCurrentPage(1);
-    }
-  }
-
-  const handleFormSubmit = (e) => {
+  
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+    const id = await getCategory({
+      variables: {
+        categoryName: formState.category,
+      }
+    });
+    // const categoryId = id.data.category._id;
+    // console.log(categoryId)
     if (!formState.firstName) {
       setErrorMessage('Name is required')
       return;
@@ -80,7 +80,7 @@ function Signup(props) {
       setErrorMessage('Password is required');
       return;
     }else if (formState.userType === 'owner') {
-      if (!formState.dogName) {
+      if (!formState.name) {
         setErrorMessage('Dog name is required');
         return;
       }else if (!formState.description) {
@@ -94,21 +94,37 @@ function Signup(props) {
         return;
       }
     }
-
+    // setFormState({
+    //   ...formState,
+    //   categoryId: categoryId,
+    // });
+    // console.log(formState);
+    const userToAdd = {
+      firstName: formState.firstName,
+      lastName: formState.lastName,
+      email: formState.email,
+      password: formState.password,
+      userType: formState.userType,
+    };
+    // console.log(userToAdd);
+    const dogToAdd = {
+      name: formState.name,
+      description: formState.description,
+      image: formState.image,
+      rate: parseInt(formState.rate),
+      zipCode: parseInt(formState.zipCode),
+      category: id.data.category._id
+    };
+    // console.log(dogToAdd);
+    const variables = {
+      userToAdd: {...userToAdd},
+      dogToAdd: {...dogToAdd}
+    }
+    // console.log(variables);
     const mutationResponse = await addUser({
       variables: {
-        email: formState.email,
-        password: formState.password,
-        firstName: formState.firstName,
-        lastName: formState.lastName,
-        userType: formState.userType,
-        name: formState.name,
-        description: formState.description,
-        image: formState.image,
-        rate: formState.rate,
-        zipCode: formState.zipCode,
-        category: formState.category
-      },
+        ...variables
+      }
     });
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
@@ -122,19 +138,17 @@ function Signup(props) {
       dogName:'',
       description: '',
       image: '',
-      rate: '',
-      zipCode: '',
+      rate: 0,
+      zipCode: 0,
       category: 'Guide Dogs'
     });
     setErrorMessage('');
   };
-
   return (
     <Container>
       
       <Form onSubmit={handleFormSubmit}>
-        {(currentPage === 1) ? 
-        (<>
+
         <h1 className='mb-3'>Personal Information</h1>
         <Row className='mb-4'>
           <Col xs={12} md={6}>
@@ -201,7 +215,8 @@ function Signup(props) {
           onChange={handleInputChange}
           label="the owner of a therapy dog" />
         </Form.Group>
-        </>) : (<>
+{formState.userType === 'owner' ?
+      <>
         <h1 className='mb-3'>Dog Information</h1>
         <Row className='mb-4'>
           <Col xs={12} md={6}>
@@ -264,8 +279,8 @@ function Signup(props) {
             </Form.Group>
           </Col>
         </Row>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
         <Form.Label className='me-5'>I can help with:</Form.Label>
+        <Form.Group className="mb-3">
         {categories.map((item) => (
           <Form.Check
             key={item._id}
@@ -276,31 +291,22 @@ function Signup(props) {
             onChange={handleInputChange}
             label={item.name}
           />
-        ))}
-        </Form.Group>
-        </>)}
-        {((currentPage === 1 && formState.userType ==='patient') || (currentPage === 2)) ?
-        (<Button variant="primary" type="submit">
+          ))}
+          </Form.Group>
+        <Button variant="primary" type="submit">
         Submit
-      </Button>) :
-        ("")}
+      </Button>
+        </> :
+        <><Button variant="primary" type="submit">
+        Submit
+      </Button></>}
+        
       </Form>
       {errorMessage && (
           <div>
             <p className='error-text'>{errorMessage}</p>
           </div>
         )}
-      {formState.userType === "owner" && (
-      <Pagination>
-        <Pagination.Prev
-        name='previous'
-        onClick={handlePage}/>
-
-        <Pagination.Next
-        name='next'
-        onClick={handlePage}/>
-      </Pagination>
-      )}
     </Container>
   );
 }

@@ -34,7 +34,7 @@ export const ADD_ORDER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($userToAdd: UserAddInput! ,$dogToAdd: DogAddInput) {
+  mutation addUser($userToAdd: UserAddInput!, $dogToAdd: DogAddInput) {
     addUser(userToAdd: $userToAdd, dogToAdd: $dogToAdd) {
       token
       user {
