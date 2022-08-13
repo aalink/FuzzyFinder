@@ -43,8 +43,9 @@ function CategoryMenu() {
   };
 
   return (
-      <div>
-        <h2>Choose your preferred dog category:</h2>
+      <div className="categoryMenu">
+        <h2>Choose your preferred service dog category:</h2>
+        <div className="categoryBtns">
         {categories.map((item) => (
           <button
             key={item._id}
@@ -55,6 +56,7 @@ function CategoryMenu() {
             {item.name}
           </button>
         ))}
+        </div>  
       </div>
   );
 }
