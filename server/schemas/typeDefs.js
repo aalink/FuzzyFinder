@@ -80,12 +80,12 @@ const typeDefs = gql`
     earnings: Float
   }
   input UserInput {
-    _id: ID!
-    firstName: String!
-    lastName: String!
-    email: String!
-    password: String!
-    userType: String!
+    _id: ID
+    firstName: String
+    lastName: String
+    email: String
+    password: String
+    userType: String
     orders: [OrderInput]
     dogs: [DogInput]
     earnings: Float
@@ -111,6 +111,10 @@ const typeDefs = gql`
     user: UserInput!
     client: [UserInput]
   }
+  input passwordUpdate {
+    currentPassword: String!
+    newPassword: String!
+  }
 
   type S3Object {
     ETag: String
@@ -133,6 +137,7 @@ const typeDefs = gql`
     addUser(userToAdd: UserAddInput!, dogToAdd: DogAddInput): Auth
     addOrder(dogs: [ID]!, quantity:[Int]!): Order
     updateUser(userToUpdate: UserInput): User
+    updatePassword(currentPassword: String!, newPassword: String!): User
     addDog (dogToSave: DogAddInput): Dog
     updateDog(dogToUpdate: DogInput): Dog
     login(email: String!, password: String!): Auth

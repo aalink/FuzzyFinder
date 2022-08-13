@@ -43,3 +43,12 @@ export const ADD_USER = gql`
     }
   }
 `;
+export const UPDATE_PASSWORD = gql`
+  mutation updatePassword($currentPassword: String, $newPassword: String) {
+    updatePassword(currentPassword: $currentPassword, newPassword: $password) {
+      user {
+        _id
+      }
+    }
+  }
+`

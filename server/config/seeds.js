@@ -4,13 +4,6 @@ const { User, Dog, Category } = require('../models');
 db.once('open', async () => {
 
   await User.deleteMany();
-  // await User.create({
-  //   firstName: 'Pamela',
-  //   lastName: 'Washington',
-  //   email: 'pamela@testmail.com',
-  //   password: 'password12345',
-  //   userType: 'owner'
-  // })
 
   await Category.deleteMany();
 

@@ -40,7 +40,7 @@ const resolvers = {
         const user = await User.findById(context.user._id).populate({
           path: 'orders.dogs',
           populate: 'category'
-        });
+        }).populate('dogs');
 
         user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
 
@@ -133,6 +133,19 @@ const resolvers = {
         return await User.findByIdAndUpdate(context.user._id, args, { new: true });
       }
 
+      throw new AuthenticationError('Not logged in');
+    },
+    updatePassword: async (parent, {currentPassword, newPassword}, context) => {
+      console.log(currentPassword);
+      console.log(newPassword);
+      if (context.user) {
+        const user = await User.findOne({ _id:context.user._id });
+          const correctPw = await user.isCorrectPassword({password: currentPassword});
+          if (!correctPw) {
+            return 'Something went wrong!';
+          }
+          return await User.findByIdAndUpdate(context.user._id, { password : newPassword }, { new: true });
+        }
       throw new AuthenticationError('Not logged in');
     },
     updateDog: async (parent, { _id, dogToUpdate }) => {
