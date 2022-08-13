@@ -170,7 +170,7 @@ const userIds = await User.find({userType: 'owner'});
     },
     {
       name: 'Robby',
-      description: 'Hi, this is playful Robby. I\'m a trained guide dogs for people with vision impairment. I\'m diligent and hard-working. If you need my help, feel free to ask my owner for an appointment.',
+      description: 'Hi, this is playful Robby. I\'m a trained guide dog for people with vision impairment. I\'m diligent and hard-working. If you need my help, feel free to ask my owner for an appointment.',
       image: '11-dog-blackbrownmix.jpg',
       rate: 10,
       zipCode: 30097,
