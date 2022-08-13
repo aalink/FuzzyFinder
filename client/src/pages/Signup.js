@@ -18,11 +18,12 @@ function Signup(props) {
     email: '',
     password: '',
     userType: 'patient',
+    name:'',
     description: '',
+    image: '',
     rate: '',
     zipCode: '',
-    image: '',
-    category: ''
+    category: 'Guide Dogs'
 });
   const [errorMessage, setErrorMessage] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -65,38 +66,66 @@ function Signup(props) {
   }
 
   const handleFormSubmit = (e) => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
     e.preventDefault();
-
-    // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
     if (!formState.firstName) {
       setErrorMessage('Name is required')
       return;
-    }
-    if (!formState.lastName) {
-      setErrorMessage(
-        'Last Name is required'
-      );
+    } else if (!formState.lastName) {
+      setErrorMessage('Last Name is required');
       return;
-    }
-    if (!validateEmail(formState.email)) {
+    }else if (!validateEmail(formState.email)) {
       setErrorMessage('Email is invalid');
-      // We want to exit out of this code block if something is wrong so that the user can correct it
       return;
-      // Then we check to see if the password is not valid. If so, we set an error message regarding the password.
-    }
-    if (!formState.password) {
-      setErrorMessage(
-        'Password is required'
-      );
+    }else if (!formState.password) {
+      setErrorMessage('Password is required');
       return;
+    }else if (formState.userType === 'owner') {
+      if (!formState.dogName) {
+        setErrorMessage('Dog name is required');
+        return;
+      }else if (!formState.description) {
+        setErrorMessage('Dog description is required');
+        return;
+      }else if (!formState.rate) {
+        setErrorMessage('Hourly rate is required');
+        return;
+      }else if (!formState.zipCode) {
+        setErrorMessage('Zip Code is required');
+        return;
+      }
     }
-    // If everything goes according to plan, we want to clear out the input after a successful registration.
-    // setFirstName('');
-    // setLastName('');
-    // setEmail('');
-    // setPassword('');
-    // setUserType('patient');
+
+    const mutationResponse = await addUser({
+      variables: {
+        email: formState.email,
+        password: formState.password,
+        firstName: formState.firstName,
+        lastName: formState.lastName,
+        userType: formState.userType,
+        name: formState.name,
+        description: formState.description,
+        image: formState.image,
+        rate: formState.rate,
+        zipCode: formState.zipCode,
+        category: formState.category
+      },
+    });
+    const token = mutationResponse.data.addUser.token;
+    Auth.login(token);
+
+    setFormState({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      userType: 'patient',
+      dogName:'',
+      description: '',
+      image: '',
+      rate: '',
+      zipCode: '',
+      category: 'Guide Dogs'
+    });
     setErrorMessage('');
   };
 
@@ -176,10 +205,10 @@ function Signup(props) {
         <h1 className='mb-3'>Dog Information</h1>
         <Row className='mb-4'>
           <Col xs={12} md={6}>
-            <Form.Group className="mb-3" controlId="dogName">
+            <Form.Group className="mb-3" controlId="name">
             <Form.Label className='me-5'>Dog Name:</Form.Label>
             <Form.Control
-              name='dogName'
+              name='name'
               onChange={handleInputChange}
               type="text"
               placeholder="Fuzzy"
@@ -198,7 +227,7 @@ function Signup(props) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="image">
-            <Form.Label className='me-5'>Description:</Form.Label>
+            <Form.Label className='me-5'>Image:</Form.Label>
             <Form.Control
               name='image'
               onChange={handleInputChange}

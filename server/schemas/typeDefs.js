@@ -129,7 +129,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(userToAdd: UserAddInput): Auth
+    addUser(userToAdd: UserAddInput!, dogToAdd: DogAddInput): Auth
     addOrder(dogs: [ID]!, quantity:[Int]!): Order
     updateUser(userToUpdate: UserInput): User
     addDog (dogToSave: DogAddInput): Dog
