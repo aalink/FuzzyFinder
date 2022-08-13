@@ -1,12 +1,10 @@
-import Pagination from 'react-bootstrap/Pagination';
 import { Button, Form, Container,Row, Col } from 'react-bootstrap';
 import React, { useState, useEffect } from 'react';
-import { validateEmail } from '../utils/helpers';
+import { validateEmail, idbPromise } from '../utils/helpers';
 import { useStoreContext } from "../utils/GlobalState";
-import { useQuery } from '@apollo/client';
-import { QUERY_CATEGORIES } from '../utils/queries'
+import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
+import { QUERY_CATEGORIES, QUERY_CATEGORY } from '../utils/queries'
 import { UPDATE_CATEGORIES } from "../utils/actions";
-import { idbPromise } from "../utils/helpers";
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { Link } from 'react-router-dom';
@@ -18,18 +16,21 @@ function Signup(props) {
     email: '',
     password: '',
     userType: 'patient',
+    name:'',
     description: '',
-    rate: '',
-    zipCode: '',
     image: '',
-    category: ''
-});
+    rate: 0,
+    zipCode: 0,
+    category: 'Guide Dogs',
+    categoryId: ''
+  });
   const [errorMessage, setErrorMessage] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
   const [state, dispatch] = useStoreContext();
   const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
+  const [getCategory, {datos}] = useLazyQuery(QUERY_CATEGORY);
+  const [addUser] = useMutation(ADD_USER);
   const { categories } = state;
-
+  
   useEffect(() => {
     if (categoryData) {
       dispatch({
@@ -48,64 +49,106 @@ function Signup(props) {
       });
     }
   }, [categoryData, loading, dispatch]);
-
-    const handleInputChange = (event) => {
+  
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormState({
       ...formState,
       [name]: value,
     });
   };
-  const handlePage = (e) => {
-    if (e.currentTarget.name === 'next' && currentPage === 1) {
-      setCurrentPage(2);
-    } else if (e.currentTarget.name === 'previous' && currentPage === 2) {
-      setCurrentPage(1);
-    }
-  }
-
-  const handleFormSubmit = (e) => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
+  
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-
-    // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
+    const id = await getCategory({
+      variables: {
+        categoryName: formState.category,
+      }
+    });
+    // const categoryId = id.data.category._id;
+    // console.log(categoryId)
     if (!formState.firstName) {
       setErrorMessage('Name is required')
       return;
-    }
-    if (!formState.lastName) {
-      setErrorMessage(
-        'Last Name is required'
-      );
+    } else if (!formState.lastName) {
+      setErrorMessage('Last Name is required');
       return;
-    }
-    if (!validateEmail(formState.email)) {
+    }else if (!validateEmail(formState.email)) {
       setErrorMessage('Email is invalid');
-      // We want to exit out of this code block if something is wrong so that the user can correct it
       return;
-      // Then we check to see if the password is not valid. If so, we set an error message regarding the password.
-    }
-    if (!formState.password) {
-      setErrorMessage(
-        'Password is required'
-      );
+    }else if (!formState.password) {
+      setErrorMessage('Password is required');
       return;
+    }else if (formState.userType === 'owner') {
+      if (!formState.name) {
+        setErrorMessage('Dog name is required');
+        return;
+      }else if (!formState.description) {
+        setErrorMessage('Dog description is required');
+        return;
+      }else if (!formState.rate) {
+        setErrorMessage('Hourly rate is required');
+        return;
+      }else if (!formState.zipCode) {
+        setErrorMessage('Zip Code is required');
+        return;
+      }
     }
-    // If everything goes according to plan, we want to clear out the input after a successful registration.
-    // setFirstName('');
-    // setLastName('');
-    // setEmail('');
-    // setPassword('');
-    // setUserType('patient');
+    // setFormState({
+    //   ...formState,
+    //   categoryId: categoryId,
+    // });
+    // console.log(formState);
+    const userToAdd = {
+      firstName: formState.firstName,
+      lastName: formState.lastName,
+      email: formState.email,
+      password: formState.password,
+      userType: formState.userType,
+    };
+    // console.log(userToAdd);
+    const dogToAdd = {
+      name: formState.name,
+      description: formState.description,
+      image: formState.image,
+      rate: parseInt(formState.rate),
+      zipCode: parseInt(formState.zipCode),
+      category: id.data.category._id
+    };
+    // console.log(dogToAdd);
+    const variables = {
+      userToAdd: {...userToAdd},
+      dogToAdd: {...dogToAdd}
+    }
+    // console.log(variables);
+    const mutationResponse = await addUser({
+      variables: {
+        ...variables
+      }
+    });
+    const token = mutationResponse.data.addUser.token;
+    Auth.login(token);
+
+    setFormState({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      userType: 'patient',
+      dogName:'',
+      description: '',
+      image: '',
+      rate: 0,
+      zipCode: 0,
+      category: 'Guide Dogs'
+    });
     setErrorMessage('');
   };
-
   return (
     <Container>
       
       <Form onSubmit={handleFormSubmit}>
-        {(currentPage === 1) ? 
-        (<>
+
         <h1 className='mb-3'>Personal Information</h1>
         <Row className='mb-4'>
           <Col xs={12} md={6}>
@@ -172,14 +215,15 @@ function Signup(props) {
           onChange={handleInputChange}
           label="the owner of a therapy dog" />
         </Form.Group>
-        </>) : (<>
+{formState.userType === 'owner' ?
+      <>
         <h1 className='mb-3'>Dog Information</h1>
         <Row className='mb-4'>
           <Col xs={12} md={6}>
-            <Form.Group className="mb-3" controlId="dogName">
+            <Form.Group className="mb-3" controlId="name">
             <Form.Label className='me-5'>Dog Name:</Form.Label>
             <Form.Control
-              name='dogName'
+              name='name'
               onChange={handleInputChange}
               type="text"
               placeholder="Fuzzy"
@@ -198,7 +242,7 @@ function Signup(props) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="image">
-            <Form.Label className='me-5'>Description:</Form.Label>
+            <Form.Label className='me-5'>Image:</Form.Label>
             <Form.Control
               name='image'
               onChange={handleInputChange}
@@ -235,8 +279,8 @@ function Signup(props) {
             </Form.Group>
           </Col>
         </Row>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
         <Form.Label className='me-5'>I can help with:</Form.Label>
+        <Form.Group className="mb-3">
         {categories.map((item) => (
           <Form.Check
             key={item._id}
@@ -247,31 +291,22 @@ function Signup(props) {
             onChange={handleInputChange}
             label={item.name}
           />
-        ))}
-        </Form.Group>
-        </>)}
-        {((currentPage === 1 && formState.userType ==='patient') || (currentPage === 2)) ?
-        (<Button variant="primary" type="submit">
+          ))}
+          </Form.Group>
+        <Button variant="primary" type="submit">
         Submit
-      </Button>) :
-        ("")}
+      </Button>
+        </> :
+        <><Button variant="primary" type="submit">
+        Submit
+      </Button></>}
+        
       </Form>
       {errorMessage && (
           <div>
             <p className='error-text'>{errorMessage}</p>
           </div>
         )}
-      {formState.userType === "owner" && (
-      <Pagination>
-        <Pagination.Prev
-        name='previous'
-        onClick={handlePage}/>
-
-        <Pagination.Next
-        name='next'
-        onClick={handlePage}/>
-      </Pagination>
-      )}
     </Container>
   );
 }

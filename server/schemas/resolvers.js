@@ -14,6 +14,9 @@ const resolvers = {
     categories: async () => {
       return await Category.find();
     },
+    category: async (parent, {categoryName}) => {
+      return await Category.findOne({ name: categoryName });
+    },
     dogs: async (parent, { category, name }) => {
       const params = {};
 
@@ -96,11 +99,18 @@ const resolvers = {
     }
   },
   Mutation: {
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
-      if (args.userType === 'owner') {
-        args.dog.user._id = user._id
-        await Dog.create (args);
+    addUser: async (parent, {userToAdd, dogToAdd}) => {
+      console.log(userToAdd);
+      console.log(dogToAdd);
+      let user = await User.create(userToAdd);
+      if (user.userType === 'owner') {
+        const addDog = {...dogToAdd ,user: user._id}
+        const dog = await Dog.create (addDog);
+        user = await User.findOneAndUpdate({_id: user._id},{
+          $addToSet: {
+          dogs: dog._id
+          }
+        });
       }
       const token = signToken(user);
 

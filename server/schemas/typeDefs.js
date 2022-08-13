@@ -96,8 +96,8 @@ const typeDefs = gql`
     image: String
     rate: Float!
     zipCode: Int!
-    category: [CategoryInput]!
-    user: UserInput!
+    category: ID!
+    user: UserInput
     client: [UserInput]
   }
   input DogInput {
@@ -107,7 +107,7 @@ const typeDefs = gql`
     image: String
     rate: Float!
     zipCode: Int!
-    category: [CategoryInput]!
+    category: ID!
     user: UserInput!
     client: [UserInput]
   }
@@ -121,6 +121,7 @@ const typeDefs = gql`
 
   type Query {
     categories: [Category]
+    category(categoryName: String!): Category
     dogs(category: ID, name: String): [Dog]
     dog(_id: ID!): Dog
     user: User
@@ -129,7 +130,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(userToAdd: UserAddInput): Auth
+    addUser(userToAdd: UserAddInput!, dogToAdd: DogAddInput): Auth
     addOrder(dogs: [ID]!, quantity:[Int]!): Order
     updateUser(userToUpdate: UserInput): User
     addDog (dogToSave: DogAddInput): Dog
