@@ -14,6 +14,7 @@ import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Nav from './components/Nav';
+import Profile from './pages/Profile';
 import { StoreProvider } from './utils/GlobalState';
 import Success from './pages/Success';
 import OrderHistory from './pages/OrderHistory';
@@ -68,6 +69,10 @@ function App() {
               <Route 
                 path="/dogs/:id" 
                 element={<Detail />} 
+              />
+              <Route 
+                path="/profile" 
+                element={<Profile />} 
               />
               <Route 
                 path="*" 

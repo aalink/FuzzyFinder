@@ -82,10 +82,10 @@ a:hover {
 }
 
 header {
-  /* color: var(--primary); */
   background: url("../src/assets/background1-friends4ever.jpg") no-repeat center;
   background-size: cover;
   overflow: hidden;
+  /* color: var(--primary); */
   padding-top: 700px;
   width: auto;
   display: flex;
@@ -165,8 +165,12 @@ span[role="img"] {
   cursor: default;
 }
 
-form {
+/* form {
   width: 40%;
+} */
+
+.width-40 {
+  width: 40%
 }
 
 input {
@@ -278,7 +282,6 @@ input:focus {
   padding: 100px;
   margin: 0px;
 }
-
 @media screen and (min-width: 300px) {
   .card {
     width: 100%;

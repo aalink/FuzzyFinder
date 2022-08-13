@@ -59,6 +59,8 @@ export const QUERY_USER = gql`
     user {
       firstName
       lastName
+      email
+      userType
       orders {
         _id
         purchaseDate
@@ -71,6 +73,12 @@ export const QUERY_USER = gql`
           image
         }
       }
+      dogs {
+        name
+        rate
+        description
+      }
+      earnings
     }
   }
 `;
