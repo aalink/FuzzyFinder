@@ -45,7 +45,7 @@ MERN Stack, Heroku, Stripe, AWS, GraphQL, JSON, etc.
 ## Links:
 
 - [Deployed Heroku site](https://fuzzy-finder.herokuapp.com/)
-- [GitHub repo](https://github.com/aalink/FuzzyFinder)
+- [GitHub repo](https://github.com/James-Y-Wong/FuzzyFinder)
 - [Presentation](https://docs.google.com/presentation/d/19nHs0qMicPezrtOxDNM84-Hhg5SccFVfMxHPQBNry2U/edit#slide=id.p)
 
 ## Snapshot
